@@ -1,5 +1,7 @@
 const readline = require('readline-sync');
 
+const scoreToWin = 3;
+
 function randomBetween(min, max) {
     return Math.floor(Math.random() * ((max + 1) - min)) + min;
 }
@@ -43,7 +45,7 @@ function phase1() {
     for (let i = 0; i < 5; i++) {
         let winner = round(player1, player2, i + 1);
 
-        if (winner.score == 3) {
+        if (winner.score == scoreToWin) {
             console.log(`\n${winner.name} Win!`);
             break;
         }
@@ -70,7 +72,7 @@ function phase2() {
         players.push(new Player(name));
     }
 
-    while (winner.score != 3) {
+    while (winner.score != scoreToWin) {
         let index = randomBetween(0, players.length - 1);
         [players[index], players[0]] = [players[0], players[index]];
         let player1 = players[0];
@@ -92,7 +94,7 @@ function phase3(winner) {
     for (let i = 0; i < 5; i++) {
         let winner = round(player1, player2, i + 1);
 
-        if (winner.score == 3) {
+        if (winner.score == scoreToWin) {
             console.log(`\n${winner.name} Win!\n`);
             break;
         }

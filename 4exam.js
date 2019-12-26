@@ -31,7 +31,7 @@ function round(player1, player2, roundNum) {
 }
 // //Phase1
 
-function startGame() {
+function phase1() {
     const player1 = new Player(readline.question("Enter Player 1 name: "));
     const player2 = new Player(readline.question("Enter Player 2 name: "));
 
@@ -45,4 +45,33 @@ function startGame() {
     }
 }
 
-startGame();
+function phase2() {
+
+    const players = [];
+    let winner = {};
+    let roundsCounter = 0;
+
+    console.log("Welcome! Please insert 2-7 players!");
+    for (let i = 0; i < 7; i++) {
+        let name = i < 2
+            ?
+            readline.question(`Enter Player ${i + 1} name: `)
+            :
+            readline.question(`Enter Player ${i + 1} name, to stop pick player insert 0 (Zero) `);
+        if (name == "0") {
+            break;
+        }
+        players.push(new Player(name));
+    }
+
+    while (winner.score != 3) {
+        let index = randomBetween(0, players.length - 1);
+        [players[index], players[0]] = [players[0], players[index]];
+        let player1 = players[0];
+        let player2 = players[randomBetween(1, players.length - 1)];
+        winner = round(player1, player2, ++roundsCounter);
+    }
+    console.log(`\n${winner.name} Win!`);
+}
+
+phase2();

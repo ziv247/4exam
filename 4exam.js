@@ -15,7 +15,12 @@ function round(player1, player2, roundNum) {
 
     let randNum = randomBetween(-5, 13);
     let winner = {};
+
     if (randNum % 2 == 0) {
+        if (randNum < 1 && player2.name == "Boss") {
+            console.log(`The number is negative even, sorry ${player1.name}`);
+            return { score: 0 }
+        }
         player1.score += 1;
         winner = player1;
 
@@ -71,7 +76,25 @@ function phase2() {
         let player2 = players[randomBetween(1, players.length - 1)];
         winner = round(player1, player2, ++roundsCounter);
     }
-    console.log(`\n${winner.name} Win!`);
+    console.log(`\n${winner.name} Win!\n`);
+    return winner;
 }
 
-phase2();
+function phase3(winner) {
+    winner.score = 0;
+    const player1 = winner;
+    const player2 = new Player("Boss");
+
+    console.log(`   ${player1.name} VS Boss!\n`);
+
+    for (let i = 0; i < 5; i++) {
+        let winner = round(player1, player2, i + 1);
+
+        if (winner.score == 3) {
+            console.log(`\n${winner.name} Win!\n`);
+            break;
+        }
+    }
+}
+
+phase3(phase2());

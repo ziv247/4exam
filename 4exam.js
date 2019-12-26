@@ -18,7 +18,7 @@ function round(player1, player2, roundNum) {
 
     if (randNum % 2 == 0) {
         if (randNum < 1 && player2.name == "Boss") {
-            console.log(`The number is negative even, sorry ${player1.name}`);
+            console.log(`The number is negative even, sorry ${player1.name}\n`);
             return { score: 0 }
         }
         player1.score += 1;
@@ -29,13 +29,13 @@ function round(player1, player2, roundNum) {
         winner = player2;
     }
     console.log(`Round #${roundNum}, random number is ${randNum}, ${winner.name} scored!`);
-    console.log(`Status: ${player1.name} ${player1.score}, ${player2.name} ${player2.score}`);
+    console.log(`Status: ${player1.name} ${player1.score}, ${player2.name} ${player2.score}\n`);
 
     return winner;
 
 }
-// //Phase1
 
+//Phase1
 function phase1() {
     const player1 = new Player(readline.question("Enter Player 1 name: "));
     const player2 = new Player(readline.question("Enter Player 2 name: "));
@@ -50,6 +50,7 @@ function phase1() {
     }
 }
 
+//Phase2
 function phase2() {
 
     const players = [];
@@ -80,6 +81,7 @@ function phase2() {
     return winner;
 }
 
+//Phase3
 function phase3(winner) {
     winner.score = 0;
     const player1 = winner;
